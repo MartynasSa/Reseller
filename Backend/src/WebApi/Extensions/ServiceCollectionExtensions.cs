@@ -1,3 +1,4 @@
+using Application.Models.Craigslist;
 using Application.Models.Ebay;
 using Application.Ports;
 using Infrastructure;
@@ -22,6 +23,10 @@ public static class ServiceCollectionExtensions
         services.Configure<EbayOptions>(configuration.GetSection("Ebay"));
         services.AddHttpClient<EbaySourceService>();
         services.AddScoped<IListingSource, EbaySourceService>();
+
+        services.Configure<CraigslistOptions>(configuration.GetSection("Craigslist"));
+        services.AddHttpClient<CraigslistSourceService>();
+        services.AddScoped<IListingSource, CraigslistSourceService>();
         return services;
     }
 }
