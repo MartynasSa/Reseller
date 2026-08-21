@@ -1,6 +1,7 @@
 using Application.Models.Craigslist;
 using Application.Models.Ebay;
 using Application.Ports;
+using Application.Services;
 using Infrastructure;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        // No Application-layer services to register yet; kept for symmetry with
-        // AddInfrastructureServices and to be ready for future additions.
+        services.AddScoped<IListingFilterService, ListingFilterService>();
         return services;
     }
 
