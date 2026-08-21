@@ -1,5 +1,6 @@
 using Application.Models.Craigslist;
 using Application.Models.Ebay;
+using Application.Models.Polling;
 using Application.Models.Telegram;
 using Application.Ports;
 using Application.Services;
@@ -32,6 +33,9 @@ public static class ServiceCollectionExtensions
         services.Configure<TelegramOptions>(configuration.GetSection("Telegram"));
         services.AddHttpClient<TelegramNotificationSender>();
         services.AddScoped<INotificationSender, TelegramNotificationSender>();
+
+        services.Configure<PollingOptions>(configuration.GetSection("Polling"));
+        services.AddHostedService<WatchPollingWorker>();
         return services;
     }
 }
