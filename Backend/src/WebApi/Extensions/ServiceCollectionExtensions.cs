@@ -1,5 +1,6 @@
 using Application.Models.Craigslist;
 using Application.Models.Ebay;
+using Application.Models.Telegram;
 using Application.Ports;
 using Application.Services;
 using Infrastructure;
@@ -27,6 +28,10 @@ public static class ServiceCollectionExtensions
         services.Configure<CraigslistOptions>(configuration.GetSection("Craigslist"));
         services.AddHttpClient<CraigslistSourceService>();
         services.AddScoped<IListingSource, CraigslistSourceService>();
+
+        services.Configure<TelegramOptions>(configuration.GetSection("Telegram"));
+        services.AddHttpClient<TelegramNotificationSender>();
+        services.AddScoped<INotificationSender, TelegramNotificationSender>();
         return services;
     }
 }
